@@ -22,13 +22,14 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const currentIndex = slides.length > 0 ? activeIndex % slides.length : 0;
   const title = (hero.hero_title || "Palareng").trim() || "Palareng";
+  const hasPalarengHeroLayout = /kampung palareng/i.test(title);
   const titleParts = useMemo(() => {
-    if (/kampung palareng/i.test(title)) {
+    if (hasPalarengHeroLayout) {
       return ["Website", "Resmi Kampung", "Palareng"];
     }
 
     return [title];
-  }, [title]);
+  }, [hasPalarengHeroLayout, title]);
   const quickLinks = [
     {
       href: "/profil",
@@ -102,30 +103,44 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
               <p className="text-[11px] font-semibold tracking-[0.22em] text-amber-200 sm:text-xs sm:tracking-[0.28em] md:text-sm">
                 {hero.hero_badge}
               </p>
-              <h1 className="mt-3 font-serif text-[2rem] font-bold leading-[1.04] text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.34)] sm:text-4xl md:text-5xl lg:text-6xl">
-                {titleParts.map((line, lineIndex) => {
-                  const previousLength = titleParts
-                    .slice(0, lineIndex)
-                    .reduce((sum, item) => sum + item.length, 0);
+              {hasPalarengHeroLayout ? (
+                <div className="mt-3 font-serif font-bold leading-none text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.34)]">
+                  <span className="block text-[1.9rem] sm:text-4xl md:text-5xl lg:text-[3.7rem]">
+                    Website
+                  </span>
+                  <span className="mt-1 block text-[1.7rem] sm:mt-2 sm:text-[2.6rem] md:text-[3.2rem] lg:text-[4.3rem]">
+                    Resmi Kampung
+                  </span>
+                  <span className="mt-1 block whitespace-nowrap text-[2.25rem] text-amber-200 sm:mt-2 sm:text-[3.4rem] md:text-[4.2rem] lg:text-[5.4rem]">
+                    Palareng
+                  </span>
+                </div>
+              ) : (
+                <h1 className="mt-3 font-serif text-[2rem] font-bold leading-[1.04] text-white drop-shadow-[0_6px_24px_rgba(0,0,0,0.34)] sm:text-4xl md:text-5xl lg:text-6xl">
+                  {titleParts.map((line, lineIndex) => {
+                    const previousLength = titleParts
+                      .slice(0, lineIndex)
+                      .reduce((sum, item) => sum + item.length, 0);
 
-                  return (
-                    <span
-                      key={`${line}-${lineIndex}`}
-                      className={`block ${lineIndex > 0 ? "mt-1 md:mt-2" : ""} ${lineIndex === titleParts.length - 1 ? "whitespace-nowrap" : ""}`}
-                    >
-                      {Array.from(line).map((char, index) => (
-                        <span
-                          key={`${char}-${lineIndex}-${index}`}
-                          className="hero-title-letter"
-                          style={{ animationDelay: `${(previousLength + index) * 0.045}s` }}
-                        >
-                          {char === " " ? "\u00A0" : char}
-                        </span>
-                      ))}
-                    </span>
-                  );
-                })}
-              </h1>
+                    return (
+                      <span
+                        key={`${line}-${lineIndex}`}
+                        className={`block ${lineIndex > 0 ? "mt-1 md:mt-2" : ""} ${lineIndex === titleParts.length - 1 ? "whitespace-nowrap" : ""}`}
+                      >
+                        {Array.from(line).map((char, index) => (
+                          <span
+                            key={`${char}-${lineIndex}-${index}`}
+                            className="hero-title-letter"
+                            style={{ animationDelay: `${(previousLength + index) * 0.045}s` }}
+                          >
+                            {char === " " ? "\u00A0" : char}
+                          </span>
+                        ))}
+                      </span>
+                    );
+                  })}
+                </h1>
+              )}
               <div className="mx-auto mt-3 h-px w-16 bg-[linear-gradient(90deg,_transparent,_rgba(250,204,21,0.95),_transparent)] sm:w-20" />
               {hero.hero_description ? (
                 <p className="mx-auto mt-4 max-w-2xl text-sm leading-6 text-white/86 sm:leading-7 md:text-base">
