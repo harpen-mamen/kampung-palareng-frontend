@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Expand, X } from "lucide-react";
 import { PublicMap } from "@/components/maps/public-map";
@@ -8,6 +9,7 @@ import type { RumahMarker } from "@/types/portal";
 
 export function HomeMapPreview({ markers }: { markers: RumahMarker[] }) {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobileViewport, setIsMobileViewport] = useState(false);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -19,6 +21,16 @@ export function HomeMapPreview({ markers }: { markers: RumahMarker[] }) {
       document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const syncViewport = () => setIsMobileViewport(mediaQuery.matches);
+
+    syncViewport();
+    mediaQuery.addEventListener("change", syncViewport);
+
+    return () => mediaQuery.removeEventListener("change", syncViewport);
+  }, []);
 
   return (
     <>
@@ -38,18 +50,28 @@ export function HomeMapPreview({ markers }: { markers: RumahMarker[] }) {
         </div>
 
         <div className="absolute inset-x-4 bottom-4 z-20 flex justify-end">
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_32px_rgba(11,94,215,0.24)] transition hover:bg-sky-800"
-          >
-            <Expand className="h-4 w-4" />
-            Buka Peta
-          </button>
+          {isMobileViewport ? (
+            <Link
+              href="/peta"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_32px_rgba(11,94,215,0.24)] transition hover:bg-sky-800"
+            >
+              <Expand className="h-4 w-4" />
+              Buka Peta
+            </Link>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-sky-700 px-5 py-3 text-sm font-semibold text-white shadow-[0_18px_32px_rgba(11,94,215,0.24)] transition hover:bg-sky-800"
+            >
+              <Expand className="h-4 w-4" />
+              Buka Peta
+            </button>
+          )}
         </div>
       </div>
 
-      {isOpen ? (
+      {isOpen && !isMobileViewport ? (
         <div className="fixed inset-0 z-[1200] bg-[rgba(2,6,23,0.82)] backdrop-blur-sm sm:p-4">
           <button
             type="button"
