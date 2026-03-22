@@ -15,8 +15,8 @@ import {
 } from "lucide-react";
 import { PublicFooter } from "@/components/public/footer";
 import { HeroSection } from "@/components/public/hero";
+import { HomeMapPreview } from "@/components/maps/home-map-preview";
 import { PublicNavbar } from "@/components/public/navbar";
-import { PublicMap } from "@/components/maps/public-map";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { TourismCard } from "@/components/shared/tourism-card";
 import {
@@ -197,7 +197,7 @@ export default async function HomePage() {
             description="Peta publik tetap dipertahankan sebagai bagian penting dashboard agar pengunjung bisa melihat sebaran rumah kampung."
           />
           <div data-reveal-card className="card-panel rounded-[1.75rem] p-3">
-            <PublicMap markers={mapData.markers} />
+            <HomeMapPreview markers={mapData.markers} />
           </div>
         </section>
 
