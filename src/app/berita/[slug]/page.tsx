@@ -1,20 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { Merriweather, Source_Sans_3 } from "next/font/google";
 import { ArrowLeft, CalendarDays, Facebook, MessageCircle, Newspaper, Send, Share2 } from "lucide-react";
 import { PublicFooter } from "@/components/public/footer";
 import { PublicNavbar } from "@/components/public/navbar";
 import { getNewsDetail } from "@/lib/api";
-
-const headlineFont = Merriweather({
-  subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
@@ -38,7 +27,7 @@ export default async function BeritaDetailPage({
   const articleUrl = `${appUrl}/berita/${slug}`;
 
   return (
-    <div className={`bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)] ${bodyFont.className}`}>
+    <div className="bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)]">
       <div className="relative">
         <PublicNavbar variant="overlay" activeHref="/berita" />
         <section className="relative overflow-hidden">
@@ -72,7 +61,7 @@ export default async function BeritaDetailPage({
                     {formatDate(berita.created_at)}
                   </span>
                 </div>
-                <h1 className={`${headlineFont.className} mt-5 max-w-4xl text-4xl font-black leading-tight text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.38)] md:text-5xl`}>
+                <h1 className="mt-5 max-w-4xl font-serif text-4xl font-black leading-tight text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.38)] md:text-5xl">
                   {berita.judul}
                 </h1>
                 <p className="mt-5 max-w-3xl text-base leading-8 text-white/84 md:text-lg">

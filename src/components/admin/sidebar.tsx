@@ -21,7 +21,14 @@ import {
   Warehouse,
 } from "lucide-react";
 
-const items = [
+type SidebarItem = {
+  href: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  withNotification?: boolean;
+};
+
+const items: SidebarItem[] = [
   { href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard },
   { href: "/admin/keluarga", label: "Data Keluarga", icon: Users },
   { href: "/admin/penduduk", label: "Data Penduduk", icon: Users },
@@ -40,7 +47,7 @@ const items = [
   { href: "/admin/statistik", label: "Statistik", icon: LineChart },
   { href: "/admin/laporan", label: "Laporan", icon: FileText },
   { href: "/admin/pengguna", label: "Pengguna", icon: UserCog },
-] as const;
+];
 
 export function AdminSidebar({ notificationCount = 0 }: { notificationCount?: number }) {
   const pathname = usePathname();

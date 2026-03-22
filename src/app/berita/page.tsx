@@ -1,21 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { Merriweather, Source_Sans_3 } from "next/font/google";
 import { BellRing, CalendarDays, Compass, Facebook, MessageCircle, Newspaper, Send, Sparkles } from "lucide-react";
 import { PublicFooter } from "@/components/public/footer";
 import { PublicNavbar } from "@/components/public/navbar";
 import { PublicPageHero } from "@/components/public/page-hero";
 import { getAnnouncements, getPublicHero, getPublicNews } from "@/lib/api";
-
-const headlineFont = Merriweather({
-  subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
 
@@ -49,7 +38,7 @@ export default async function BeritaPage() {
   const activityNews = news.data[1] ?? news.data[0];
 
   return (
-    <div className={`bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)] ${bodyFont.className}`}>
+    <div className="bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)]">
       <div className="relative">
         <PublicNavbar variant="overlay" activeHref="/berita" />
         <PublicPageHero
@@ -114,7 +103,7 @@ export default async function BeritaPage() {
                   <Sparkles className="h-9 w-9" />
                 </div>
                 <div className="flex-1">
-                  <p className={`${headlineFont.className} text-[1.35rem] font-bold leading-snug text-slate-950`}>
+                  <p className="font-serif text-[1.35rem] font-bold leading-snug text-slate-950">
                     {announcements[0]?.judul ?? "Pemberitahuan Kampung"}
                   </p>
                   <p className="mt-3 text-sm leading-7 text-slate-600">
@@ -148,7 +137,7 @@ export default async function BeritaPage() {
                   <div className="h-40 rounded-[1.35rem] bg-[linear-gradient(180deg,_#f59e0b,_#fdba74)]" />
                 )}
                 <div>
-                  <p className={`${headlineFont.className} text-[2rem] font-bold leading-tight text-slate-950`}>
+                  <p className="font-serif text-[2rem] font-bold leading-tight text-slate-950">
                     {featuredNews?.judul ?? "Berita kampung"}
                   </p>
                   <p className="mt-2 text-sm text-slate-500">
@@ -191,7 +180,7 @@ export default async function BeritaPage() {
                   AKSI
                 </div>
               )}
-              <p className={`${headlineFont.className} mt-5 text-[1.55rem] font-bold leading-snug text-slate-950`}>
+              <p className="mt-5 font-serif text-[1.55rem] font-bold leading-snug text-slate-950">
                 {activityNews?.judul ?? "Kegiatan Kampung Palareng"}
               </p>
               <p className="mt-3 text-sm leading-7 text-slate-600">
@@ -220,7 +209,7 @@ export default async function BeritaPage() {
                   Semua Berita
                   </p>
                 </div>
-                <h2 className={`${headlineFont.className} mt-2 text-[2rem] font-bold text-slate-950`}>
+                <h2 className="mt-2 font-serif text-[2rem] font-bold text-slate-950">
                   Seluruh berita yang sudah dipublikasikan
                 </h2>
               </div>
@@ -259,7 +248,7 @@ export default async function BeritaPage() {
                         <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-100/90">
                           Diterbitkan {formatDate(item.created_at)}
                         </p>
-                        <h3 className={`${headlineFont.className} mt-3 text-[1.65rem] font-bold leading-snug text-white`}>
+                        <h3 className="mt-3 font-serif text-[1.65rem] font-bold leading-snug text-white">
                           {item.judul}
                         </h3>
                         <p className="mt-3 text-sm leading-7 text-white/84">

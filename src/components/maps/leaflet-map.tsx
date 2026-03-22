@@ -404,10 +404,11 @@ export function LeafletMap({
       );
       const safeOccupants = marker.keluarga?.jumlah_anggota ?? marker.jumlah_penghuni;
       const safePhoto = marker.foto_rumah ? escapeHtml(marker.foto_rumah) : "";
-      const bantuanCount = marker.keluarga?.bantuan?.length ?? 0;
+      const keluargaBantuan = marker.keluarga?.bantuan ?? [];
+      const bantuanCount = keluargaBantuan.length;
       const bantuanItems =
         bantuanCount > 0
-          ? marker.keluarga.bantuan
+          ? keluargaBantuan
               .map((item) => {
                 const bantuanName = escapeHtml(item.nama_bantuan ?? "Bantuan");
                 const bantuanStatus = escapeHtml(item.status_penerima ?? "-");

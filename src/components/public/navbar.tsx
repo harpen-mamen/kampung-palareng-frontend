@@ -4,7 +4,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
-const groupedNavItems = [
+type NavLinkItem = {
+  href: string;
+  label: string;
+};
+
+type NavGroupItem = {
+  label: string;
+  items: NavLinkItem[];
+};
+
+const groupedNavItems: Array<NavLinkItem | NavGroupItem> = [
   { href: "/", label: "Beranda" },
   { href: "/profil", label: "Profil Kampung" },
   {

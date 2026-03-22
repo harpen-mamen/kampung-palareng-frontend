@@ -1,18 +1,7 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Merriweather, Source_Sans_3 } from "next/font/google";
 import type { HeroSetting } from "@/types/portal";
-
-const headlineFont = Merriweather({
-  subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 type HeroStat = {
   label: string;
@@ -76,7 +65,7 @@ export function PublicPageHero({
   const backgroundImage = images[0];
 
   return (
-    <section className={`relative overflow-hidden ${bodyFont.className}`}>
+    <section className="relative overflow-hidden">
       <div className="relative min-h-[360px] bg-[linear-gradient(135deg,_#0b2f63_0%,_#0f5cb5_52%,_#1a8d6f_100%)] md:min-h-[420px]">
         {backgroundImage ? (
           <Image
@@ -96,7 +85,7 @@ export function PublicPageHero({
             <p className="text-xs font-semibold uppercase tracking-[0.34em] text-emerald-200 md:text-sm">
               {eyebrow}
             </p>
-            <h1 className={`${headlineFont.className} mt-4 max-w-4xl text-4xl font-black leading-tight text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.38)] md:text-5xl lg:text-[3.65rem]`}>
+            <h1 className="mt-4 max-w-4xl font-serif text-4xl font-black leading-tight text-white drop-shadow-[0_8px_26px_rgba(0,0,0,0.38)] md:text-5xl lg:text-[3.65rem]">
               {title}
             </h1>
             <div className="mt-4 h-px w-24 bg-[linear-gradient(90deg,_transparent,_rgba(250,204,21,0.95),_transparent)]" />

@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { FileCheck2, ShieldCheck, UserRoundPlus } from "lucide-react";
 import { PublicFooter } from "@/components/public/footer";
 import { PublicNavbar } from "@/components/public/navbar";
@@ -58,7 +59,9 @@ export default async function SuratPage() {
       </div>
 
       <main id="form-surat" className="container-shell relative z-10 -mt-10 pb-16 md:-mt-12">
-        <SuratForm />
+        <Suspense fallback={null}>
+          <SuratForm />
+        </Suspense>
       </main>
       <PublicFooter />
     </div>

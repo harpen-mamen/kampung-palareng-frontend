@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import Link from "next/link";
-import { Merriweather, Source_Sans_3 } from "next/font/google";
 import {
   BellRing,
   Compass,
@@ -28,16 +27,6 @@ import {
   getPublicStats,
   getPublicWisata,
 } from "@/lib/api";
-
-const headlineFont = Merriweather({
-  subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 function formatDate(value?: string) {
   if (!value) return "-";
@@ -110,7 +99,7 @@ export default async function HomePage() {
   ];
 
   return (
-    <div suppressHydrationWarning className={bodyFont.className}>
+    <div suppressHydrationWarning>
       <div className="relative">
         <PublicNavbar variant="overlay" activeHref="/" />
         <HeroSection hero={hero} />
@@ -124,7 +113,7 @@ export default async function HomePage() {
                   <Sparkles className="h-4 w-4" />
                   Profil Singkat
                 </div>
-                <h2 className={`${headlineFont.className} mt-5 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl`}>
+                <h2 className="mt-5 font-serif text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
                   {hero.hero_panel_title || "Selayang Pandang"}
                 </h2>
                 <div className="mt-4 flex items-center gap-4">
@@ -172,7 +161,7 @@ export default async function HomePage() {
                         <div className="absolute inset-0 bg-[linear-gradient(180deg,_rgba(15,23,42,0.03)_10%,_rgba(15,23,42,0.68)_100%)]" />
                         <div className="absolute inset-x-0 bottom-0 p-5">
                           <div className="rounded-[1.35rem] border border-white/20 bg-[linear-gradient(180deg,_rgba(15,23,42,0.2),_rgba(15,23,42,0.74))] px-4 py-4 text-white backdrop-blur-md">
-                            <p className={`${headlineFont.className} mt-2 text-[1.45rem] font-bold leading-snug text-white`}>
+                            <p className="mt-2 font-serif text-[1.45rem] font-bold leading-snug text-white">
                               {kapitalaungName}
                             </p>
                             <p className="mt-1 text-sm text-white/78">Kapitalaung Palareng</p>
@@ -185,7 +174,7 @@ export default async function HomePage() {
                           <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-[1.6rem] bg-white shadow-[0_16px_40px_rgba(15,23,42,0.10)]">
                             <Users className="h-9 w-9 text-sky-700" />
                           </div>
-                          <p className={`${headlineFont.className} mt-5 text-xl font-bold text-slate-900`}>
+                          <p className="mt-5 font-serif text-xl font-bold text-slate-900">
                             {kapitalaungName}
                           </p>
                           <p className="mt-2 text-sm font-medium uppercase tracking-[0.18em] text-slate-600">
@@ -239,7 +228,7 @@ export default async function HomePage() {
                       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-100/90">
                         Informasi warga
                       </p>
-                      <p className={`${headlineFont.className} mt-3 text-[1.55rem] font-bold leading-snug text-white`}>
+                      <p className="mt-3 font-serif text-[1.55rem] font-bold leading-snug text-white">
                         {announcements[0]?.judul ?? "Pengumuman kampung"}
                       </p>
                       <p className="mt-3 max-w-xl text-sm leading-7 text-white/82">
@@ -315,7 +304,7 @@ export default async function HomePage() {
                       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-amber-100/90">
                         {featuredNews?.kategori ?? "Berita Kampung"}
                       </p>
-                      <p className={`${headlineFont.className} mt-3 text-[1.8rem] font-bold leading-tight text-white`}>
+                      <p className="mt-3 font-serif text-[1.8rem] font-bold leading-tight text-white">
                         {featuredNews?.judul ?? "Berita kampung"}
                       </p>
                       <p className="mt-2 text-sm text-white/72">
@@ -396,7 +385,7 @@ export default async function HomePage() {
                       <p className="text-xs font-semibold uppercase tracking-[0.24em] text-emerald-100/90">
                         Sorotan kegiatan
                       </p>
-                      <p className={`${headlineFont.className} mt-3 text-[1.6rem] font-bold leading-snug text-white`}>
+                      <p className="mt-3 font-serif text-[1.6rem] font-bold leading-snug text-white">
                         {activityNews?.judul ?? "Kegiatan kampung hijau dan gotong royong"}
                       </p>
                       <p className="mt-3 max-w-xl text-sm leading-7 text-white/84">

@@ -5,17 +5,8 @@ import { useEffect, useState, useTransition } from "react";
 import { updateAdminHeroSetting } from "@/lib/api";
 import type { HeroSetting } from "@/types/portal";
 
-type StructureMember = {
-  position: string;
-  name: string;
-  photo?: string | null;
-  photo_path?: string | null;
-};
-
-type HeroSectionItem = {
-  image?: string | null;
-  image_path?: string | null;
-};
+type StructureMember = NonNullable<HeroSetting["government_structure"]>[number];
+type HeroSectionItem = NonNullable<HeroSetting["hero_sections"]>[number];
 
 const emptyMember: StructureMember = {
   position: "",
@@ -24,7 +15,23 @@ const emptyMember: StructureMember = {
   photo_path: null,
 };
 
-const emptyHeroSection: HeroSectionItem = { image: null, image_path: null };
+function createHeroSectionItem(
+  hero: HeroSetting,
+  patch?: Partial<HeroSectionItem>,
+): HeroSectionItem {
+  return {
+    badge: hero.hero_badge,
+    title: hero.hero_title,
+    description: hero.hero_description,
+    primary_label: hero.hero_primary_label,
+    primary_url: hero.hero_primary_url,
+    secondary_label: hero.hero_secondary_label,
+    secondary_url: hero.hero_secondary_url,
+    image: null,
+    image_path: null,
+    ...patch,
+  };
+}
 
 export function HeroSettingsManager({ initialHero }: { initialHero: HeroSetting }) {
   const [hero, setHero] = useState<HeroSetting>(initialHero);
@@ -43,8 +50,8 @@ export function HeroSettingsManager({ initialHero }: { initialHero: HeroSetting 
     hero.hero_sections?.length
       ? hero.hero_sections
       : (hero.hero_images?.length
-          ? hero.hero_images.map((image) => ({ image, image_path: null }))
-          : [{ image: hero.hero_image ?? null, image_path: null }]);
+          ? hero.hero_images.map((image) => createHeroSectionItem(hero, { image, image_path: null }))
+          : [createHeroSectionItem(hero, { image: hero.hero_image ?? null, image_path: null })]);
 
   useEffect(() => {
     setHero(initialHero);
@@ -59,7 +66,7 @@ export function HeroSettingsManager({ initialHero }: { initialHero: HeroSetting 
   function addHeroSection() {
     setHero((prev) => ({
       ...prev,
-      hero_sections: [...(prev.hero_sections ?? heroSections), { ...emptyHeroSection }],
+      hero_sections: [...(prev.hero_sections ?? heroSections), createHeroSectionItem(prev)],
     }));
   }
 
@@ -68,7 +75,7 @@ export function HeroSettingsManager({ initialHero }: { initialHero: HeroSetting 
     next.splice(index, 1);
     setHero((prev) => ({
       ...prev,
-      hero_sections: next.length > 0 ? next : [{ ...emptyHeroSection }],
+      hero_sections: next.length > 0 ? next : [createHeroSectionItem(prev)],
     }));
     setHeroSectionImages((prev) => {
       const updated = { ...prev };

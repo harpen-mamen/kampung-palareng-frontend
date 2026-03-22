@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { Merriweather, Source_Sans_3 } from "next/font/google";
 import {
   BookOpenText,
   Building2,
@@ -12,16 +11,6 @@ import { PublicFooter } from "@/components/public/footer";
 import { PublicNavbar } from "@/components/public/navbar";
 import { PublicPageHero } from "@/components/public/page-hero";
 import { getPublicHero } from "@/lib/api";
-
-const headlineFont = Merriweather({
-  subsets: ["latin"],
-  weight: ["700", "900"],
-});
-
-const bodyFont = Source_Sans_3({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
-});
 
 export default async function ProfilPage() {
   const profile = await getPublicHero();
@@ -57,7 +46,7 @@ export default async function ProfilPage() {
   ] as const;
 
   return (
-    <div className={`bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)] ${bodyFont.className}`}>
+    <div className="bg-[linear-gradient(180deg,_#eef7f4_0%,_#f7fbff_18%,_#ffffff_46%)]">
       <div className="relative">
         <PublicNavbar variant="overlay" activeHref="/profil" />
         <PublicPageHero
@@ -138,7 +127,7 @@ export default async function ProfilPage() {
                     <p className="text-xs font-semibold uppercase tracking-[0.24em] text-slate-500">
                       {section.eyebrow}
                     </p>
-                    <h2 className={`${headlineFont.className} mt-2 text-[2rem] font-bold leading-tight text-slate-950`}>
+                    <h2 className="mt-2 font-serif text-[2rem] font-bold leading-tight text-slate-950">
                       {section.title}
                     </h2>
                   </div>
@@ -155,7 +144,7 @@ export default async function ProfilPage() {
               <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">
                 Visual Kampung
               </p>
-              <h2 className={`${headlineFont.className} mt-2 text-[1.8rem] font-bold text-slate-950`}>
+              <h2 className="mt-2 font-serif text-[1.8rem] font-bold text-slate-950">
                 Gambaran Kampung Palareng
               </h2>
             </div>
@@ -173,7 +162,7 @@ export default async function ProfilPage() {
                       <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-sky-100/90">
                         Profil Kampung
                       </p>
-                      <p className={`${headlineFont.className} mt-2 text-[1.5rem] font-bold leading-snug text-white`}>
+                      <p className="mt-2 font-serif text-[1.5rem] font-bold leading-snug text-white">
                         {profile.profile_title || "Kampung Palareng"}
                       </p>
                       <p className="mt-2 text-sm leading-7 text-white/80">
@@ -198,7 +187,7 @@ export default async function ProfilPage() {
                 <Building2 className="h-4 w-4" />
                 Pemerintahan
               </div>
-              <h2 className={`${headlineFont.className} mt-5 text-[2.35rem] font-bold leading-tight text-slate-950`}>
+              <h2 className="mt-5 font-serif text-[2.35rem] font-bold leading-tight text-slate-950">
                 Struktur Pemerintahan Kampung
               </h2>
               <p className="mt-4 text-[1rem] leading-8 text-slate-600">
@@ -225,7 +214,7 @@ export default async function ProfilPage() {
                       </div>
                     )}
                     <div className="border-t border-slate-100 bg-[linear-gradient(180deg,_#ffffff,_#f8fbff)] p-5 text-center">
-                      <h3 className={`${headlineFont.className} text-[1.4rem] font-bold leading-snug text-slate-950`}>
+                      <h3 className="font-serif text-[1.4rem] font-bold leading-snug text-slate-950">
                         {member.name}
                       </h3>
                       <p className="mt-2 text-sm font-medium uppercase tracking-[0.18em] text-slate-500">

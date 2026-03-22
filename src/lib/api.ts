@@ -61,7 +61,10 @@ export function setApiToken(token?: string | null) {
   authToken = token ?? null;
 }
 
-function withQuery(path: string, params?: Record<string, string | number | undefined | null>) {
+function withQuery(
+  path: string,
+  params?: Record<string, string | number | boolean | undefined | null>,
+) {
   if (!params) return path;
 
   const searchParams = new URLSearchParams();
