@@ -128,10 +128,12 @@ export function LeafletMap({
   markers,
   admin = false,
   onMarkerSelect,
+  focusMode = false,
 }: {
   markers: RumahMarker[];
   admin?: boolean;
   onMarkerSelect?: (marker: RumahMarker) => void;
+  focusMode?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<LeafletMapInstance | null>(null);
@@ -570,10 +572,12 @@ export function LeafletMap({
   if (useFallbackMap) {
     return (
       <div className="space-y-4">
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
-          Peta interaktif browser tidak berhasil dimuat, jadi sistem memakai tampilan cadangan
-          berbasis koordinat data rumah.
-        </div>
+        {!focusMode ? (
+          <div className="rounded-2xl border border-amber-200 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+            Peta interaktif browser tidak berhasil dimuat, jadi sistem memakai tampilan cadangan
+            berbasis koordinat data rumah.
+          </div>
+        ) : null}
         <SimpleVillageMap markers={filteredMarkers} admin={admin} />
       </div>
     );
@@ -581,6 +585,7 @@ export function LeafletMap({
 
   return (
     <div className="relative overflow-hidden rounded-[1.35rem] border border-sky-100 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(239,246,255,0.96))] p-2.5 shadow-[0_30px_80px_rgba(11,94,215,0.12)] sm:rounded-[1.6rem] sm:p-3">
+      {!focusMode ? (
       <div className="mb-3 grid gap-3 xl:pointer-events-none xl:absolute xl:inset-x-6 xl:top-5 xl:z-[500] xl:mb-0 xl:flex xl:flex-wrap xl:items-start xl:justify-between">
         <div className="rounded-2xl border border-white/70 bg-white/88 px-4 py-3 shadow-[0_16px_35px_rgba(15,23,42,0.10)] backdrop-blur xl:pointer-events-auto">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sky-700">
@@ -685,14 +690,17 @@ export function LeafletMap({
           </div>
         </div>
       </div>
+      ) : null}
 
       <div
         ref={containerRef}
-        className="leaflet-map-host h-[360px] w-full rounded-[1.15rem] border border-white/70 sm:h-[430px] sm:rounded-[1.3rem] lg:h-[520px]"
-        style={{ height: "100%", minHeight: "360px", width: "100%" }}
+        className={`leaflet-map-host w-full rounded-[1.15rem] border border-white/70 sm:rounded-[1.3rem] ${
+          focusMode ? "h-[calc(100vh-7rem)] min-h-[520px]" : "h-[360px] sm:h-[430px] lg:h-[520px]"
+        }`}
+        style={{ height: "100%", minHeight: focusMode ? "520px" : "360px", width: "100%" }}
       />
 
-      {activePopupMarker && activePopupPosition ? (
+      {activePopupMarker && activePopupPosition && !focusMode ? (
         <div
           className="pointer-events-auto absolute z-[650] hidden w-[min(320px,calc(100%-2rem))] -translate-x-1/2 -translate-y-full md:block"
           style={{ left: activePopupPosition.x, top: activePopupPosition.y }}
@@ -754,7 +762,7 @@ export function LeafletMap({
         </div>
       ) : null}
 
-      {activePopupMarker ? (
+      {activePopupMarker && !focusMode ? (
         <div className="mt-3 rounded-[1.25rem] border border-slate-200 bg-white/96 p-4 shadow-[0_18px_44px_rgba(15,23,42,0.10)] md:hidden">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -808,7 +816,7 @@ export function LeafletMap({
         </div>
       ) : null}
 
-      {filteredMarkers.length === 0 ? (
+      {filteredMarkers.length === 0 && !focusMode ? (
         <div className="mt-3 rounded-2xl border border-amber-200 bg-white/92 px-4 py-3 text-sm text-slate-700 shadow-[0_14px_30px_rgba(15,23,42,0.10)] backdrop-blur md:pointer-events-none md:absolute md:inset-x-8 md:bottom-8 md:z-[500] md:mt-0">
           Tidak ada marker yang tersisa untuk kombinasi filter dan layer aktif saat ini.
         </div>
