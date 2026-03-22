@@ -24,8 +24,12 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
   const title = (hero.hero_title || "Palareng").trim() || "Palareng";
   const titleParts = useMemo(() => {
     if (/kampung palareng/i.test(title)) {
-      const firstLine = title.replace(/\s*Kampung Palareng\s*/i, "").trim() || "Website Resmi";
-      return [firstLine, "Kampung Palareng"];
+      const withoutPhrase = title.replace(/\s*Kampung Palareng\s*/i, " ").replace(/\s+/g, " ").trim();
+      const baseWords = withoutPhrase ? withoutPhrase.split(" ") : ["Website", "Resmi"];
+      const splitPoint = Math.max(1, baseWords.length - 1);
+      const upperLine = baseWords.slice(0, splitPoint).join(" ").trim() || "Website";
+      const middleLine = baseWords.slice(splitPoint).join(" ").trim() || "Resmi";
+      return [upperLine, middleLine, "Palareng"];
     }
 
     return [title];
@@ -112,7 +116,7 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
                   return (
                     <span
                       key={`${line}-${lineIndex}`}
-                      className={`block ${lineIndex === 1 ? "mt-1 whitespace-nowrap md:mt-2" : ""}`}
+                      className={`block ${lineIndex > 0 ? "mt-1 md:mt-2" : ""} ${lineIndex === titleParts.length - 1 ? "whitespace-nowrap" : ""}`}
                     >
                       {Array.from(line).map((char, index) => (
                         <span
