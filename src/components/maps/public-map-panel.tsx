@@ -95,7 +95,7 @@ export function PublicMapPanel({ initialData }: { initialData: PublicMapResponse
         </div>
       </div>
 
-      <div className="grid gap-4 border-b border-sky-100 bg-[linear-gradient(135deg,_rgba(248,250,252,0.95),_rgba(239,246,255,0.95))] px-5 py-4 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-4 border-b border-sky-100 bg-[linear-gradient(135deg,_rgba(248,250,252,0.95),_rgba(239,246,255,0.95))] px-4 py-4 md:grid-cols-2 md:px-5 xl:grid-cols-4">
         {quickStats.map(([label, value, caption], index) => (
           <div
             key={label}
@@ -120,9 +120,9 @@ export function PublicMapPanel({ initialData }: { initialData: PublicMapResponse
         ))}
       </div>
 
-      <div className="relative p-4 pt-24 sm:pt-28">
-        <div className="pointer-events-none absolute left-4 right-4 top-4 z-[600] flex flex-wrap items-start justify-between gap-3 sm:left-7 sm:right-7 sm:top-7">
-          <div className="pointer-events-auto relative">
+      <div className="relative p-4 lg:pt-24">
+        <div className="mb-4 flex flex-col gap-3 lg:pointer-events-none lg:absolute lg:left-4 lg:right-4 lg:top-4 lg:z-[600] lg:mb-0 lg:flex-row lg:flex-wrap lg:items-start lg:justify-between sm:gap-4 lg:left-7 lg:right-7 lg:top-7">
+          <div className="relative lg:pointer-events-auto">
             <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
@@ -147,7 +147,7 @@ export function PublicMapPanel({ initialData }: { initialData: PublicMapResponse
             </div>
 
             {filterOpen ? (
-              <div className="mt-3 w-[min(92vw,680px)] rounded-[1.5rem] border border-white/70 bg-white/96 p-4 shadow-[0_24px_60px_rgba(15,23,42,0.18)] backdrop-blur">
+              <div className="mt-3 w-full max-w-[680px] rounded-[1.5rem] border border-white/70 bg-white/96 p-4 shadow-[0_24px_60px_rgba(15,23,42,0.18)] backdrop-blur">
                 <div className="mb-3">
                   <p className="text-xs font-semibold uppercase tracking-[0.24em] text-sky-700">
                     Filter Pencarian
@@ -238,7 +238,7 @@ export function PublicMapPanel({ initialData }: { initialData: PublicMapResponse
             ) : null}
           </div>
 
-          <div className="pointer-events-none flex flex-wrap gap-2">
+          <div className="flex flex-wrap gap-2 lg:pointer-events-none lg:justify-end">
             {filters.lindongan.map((item, index) => (
               <span
                 key={item}

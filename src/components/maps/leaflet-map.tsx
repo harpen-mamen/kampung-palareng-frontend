@@ -580,9 +580,9 @@ export function LeafletMap({
   }
 
   return (
-    <div className="relative overflow-hidden rounded-[1.6rem] border border-sky-100 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(239,246,255,0.96))] p-3 shadow-[0_30px_80px_rgba(11,94,215,0.12)]">
-        <div className="pointer-events-none absolute inset-x-6 top-5 z-[500] flex flex-wrap items-start justify-between gap-3">
-        <div className="rounded-2xl border border-white/70 bg-white/88 px-4 py-3 shadow-[0_16px_35px_rgba(15,23,42,0.10)] backdrop-blur">
+    <div className="relative overflow-hidden rounded-[1.35rem] border border-sky-100 bg-[radial-gradient(circle_at_top_left,_rgba(59,130,246,0.16),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.92),_rgba(239,246,255,0.96))] p-2.5 shadow-[0_30px_80px_rgba(11,94,215,0.12)] sm:rounded-[1.6rem] sm:p-3">
+      <div className="mb-3 grid gap-3 xl:pointer-events-none xl:absolute xl:inset-x-6 xl:top-5 xl:z-[500] xl:mb-0 xl:flex xl:flex-wrap xl:items-start xl:justify-between">
+        <div className="rounded-2xl border border-white/70 bg-white/88 px-4 py-3 shadow-[0_16px_35px_rgba(15,23,42,0.10)] backdrop-blur xl:pointer-events-auto">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sky-700">
             {admin ? "Pusat Kontrol Peta" : "Peta Digital Kampung"}
           </p>
@@ -593,11 +593,11 @@ export function LeafletMap({
             Kamera otomatis menyesuaikan persebaran data rumah.
           </p>
         </div>
-        <div className="pointer-events-auto rounded-2xl border border-white/70 bg-white/88 px-4 py-3 shadow-[0_16px_35px_rgba(15,23,42,0.10)] backdrop-blur">
+        <div className="rounded-2xl border border-white/70 bg-white/88 px-4 py-3 shadow-[0_16px_35px_rgba(15,23,42,0.10)] backdrop-blur xl:pointer-events-auto">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-sky-700">
             Layer Marker
           </p>
-          <div className="mt-3 flex max-w-[320px] flex-wrap gap-2">
+          <div className="mt-3 flex flex-wrap gap-2 xl:max-w-[320px]">
             {[
               ["bantuan", "Penerima Bantuan", "leaflet-legend-dot--assisted"],
               ["dtks", "DTKS", "leaflet-legend-dot--dtks"],
@@ -629,7 +629,7 @@ export function LeafletMap({
             })}
           </div>
         </div>
-        <div className="rounded-2xl border border-white/70 bg-slate-950/82 px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] backdrop-blur">
+        <div className="rounded-2xl border border-white/70 bg-slate-950/82 px-4 py-3 text-white shadow-[0_16px_35px_rgba(15,23,42,0.18)] backdrop-blur xl:max-w-[360px]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-300">
             Legenda Aktif
           </p>
@@ -653,7 +653,7 @@ export function LeafletMap({
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/55">
                 Lindongan Terlihat
               </p>
-              <div className="flex max-w-[320px] flex-wrap gap-2 text-xs text-white/82">
+              <div className="flex flex-wrap gap-2 text-xs text-white/82 xl:max-w-[320px]">
                 {lindonganLegend.map((item) => (
                   <span key={item.label} className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1">
                     <b className={`leaflet-legend-dot leaflet-legend-dot--${item.tone}`} />
@@ -688,13 +688,13 @@ export function LeafletMap({
 
       <div
         ref={containerRef}
-        className="leaflet-map-host h-[520px] w-full rounded-[1.3rem] border border-white/70"
-        style={{ height: "520px", minHeight: "520px", width: "100%" }}
+        className="leaflet-map-host h-[360px] w-full rounded-[1.15rem] border border-white/70 sm:h-[430px] sm:rounded-[1.3rem] lg:h-[520px]"
+        style={{ height: "100%", minHeight: "360px", width: "100%" }}
       />
 
       {activePopupMarker && activePopupPosition ? (
         <div
-          className="pointer-events-auto absolute z-[650] w-[min(320px,calc(100%-2rem))] -translate-x-1/2 -translate-y-full"
+          className="pointer-events-auto absolute z-[650] hidden w-[min(320px,calc(100%-2rem))] -translate-x-1/2 -translate-y-full md:block"
           style={{ left: activePopupPosition.x, top: activePopupPosition.y }}
         >
           <div className="rounded-[1.35rem] border border-white/85 bg-white/96 p-4 shadow-[0_22px_50px_rgba(15,23,42,0.18)] backdrop-blur">
@@ -754,8 +754,62 @@ export function LeafletMap({
         </div>
       ) : null}
 
+      {activePopupMarker ? (
+        <div className="mt-3 rounded-[1.25rem] border border-slate-200 bg-white/96 p-4 shadow-[0_18px_44px_rgba(15,23,42,0.10)] md:hidden">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-sky-700">
+                Detail Keluarga
+              </p>
+              <p className="mt-2 text-base font-black text-slate-950">
+                {activePopupMarker.keluarga?.nama_kepala_keluarga ?? activePopupMarker.nama_kepala_keluarga ?? "Keluarga"}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                setActivePopupMarker(null);
+                setActivePopupPosition(null);
+              }}
+              className="rounded-full border border-slate-200 px-2 py-1 text-xs font-semibold text-slate-500"
+            >
+              Tutup
+            </button>
+          </div>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            {activePopupMarker.keluarga?.alamat ?? activePopupMarker.alamat_singkat ?? "Alamat belum diisi"}
+          </p>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="rounded-xl bg-slate-50 px-3 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Lindongan</p>
+              <p className="mt-1 text-sm font-bold text-slate-950">
+                {activePopupMarker.keluarga?.lindongan ?? activePopupMarker.lindongan ?? "-"}
+              </p>
+            </div>
+            <div className="rounded-xl bg-slate-50 px-3 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Penghuni</p>
+              <p className="mt-1 text-sm font-bold text-slate-950">
+                {activePopupMarker.keluarga?.jumlah_anggota ?? activePopupMarker.jumlah_penghuni}
+              </p>
+            </div>
+            <div className="rounded-xl bg-slate-50 px-3 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">Pekerjaan</p>
+              <p className="mt-1 text-sm font-bold text-slate-950">
+                {activePopupMarker.keluarga?.pekerjaan_utama ?? "-"}
+              </p>
+            </div>
+            <div className="rounded-xl bg-slate-50 px-3 py-3">
+              <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-slate-500">DTKS</p>
+              <p className="mt-1 text-sm font-bold text-slate-950">
+                {activePopupMarker.keluarga?.status_dtks ? "Masuk DTKS" : "Non-DTKS"}
+              </p>
+            </div>
+          </div>
+        </div>
+      ) : null}
+
       {filteredMarkers.length === 0 ? (
-        <div className="pointer-events-none absolute inset-x-8 bottom-8 z-[500] rounded-2xl border border-amber-200 bg-white/92 px-4 py-3 text-sm text-slate-700 shadow-[0_14px_30px_rgba(15,23,42,0.10)] backdrop-blur">
+        <div className="mt-3 rounded-2xl border border-amber-200 bg-white/92 px-4 py-3 text-sm text-slate-700 shadow-[0_14px_30px_rgba(15,23,42,0.10)] backdrop-blur md:pointer-events-none md:absolute md:inset-x-8 md:bottom-8 md:z-[500] md:mt-0">
           Tidak ada marker yang tersisa untuk kombinasi filter dan layer aktif saat ini.
         </div>
       ) : null}
