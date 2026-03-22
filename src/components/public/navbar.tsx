@@ -72,42 +72,42 @@ export function PublicNavbar({
           : "absolute inset-x-0 top-0 z-30"
       }
     >
-      <div className="container-shell flex items-center justify-between gap-6 py-5">
-        <Link href="/" className="flex items-center gap-3">
+      <div className="container-shell flex items-start justify-between gap-3 py-3 sm:items-center sm:gap-6 sm:py-5">
+        <Link href="/" className="flex min-w-0 items-center gap-2.5 sm:gap-3">
           {logoFailed ? (
-            <div className="flex h-12 w-12 items-center justify-center rounded-[1.35rem] bg-[linear-gradient(135deg,_#0b5ed7,_#168a65)] text-sm font-black text-white">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[1.1rem] bg-[linear-gradient(135deg,_#0b5ed7,_#168a65)] text-xs font-black text-white sm:h-12 sm:w-12 sm:rounded-[1.35rem] sm:text-sm">
               KP
             </div>
           ) : (
-            <div className="flex h-12 w-12 items-center justify-center overflow-hidden rounded-[1.35rem] bg-transparent">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-[1.1rem] bg-transparent sm:h-12 sm:w-12 sm:rounded-[1.35rem]">
               <Image
                 src="/logo-sangihe.png"
                 alt="Logo Pemerintah Kabupaten Kepulauan Sangihe"
                 width={48}
                 height={48}
-                className="h-12 w-12 object-contain"
+                className="h-10 w-10 object-contain sm:h-12 sm:w-12"
                 onError={() => setLogoFailed(true)}
                 unoptimized
               />
             </div>
           )}
-          <div className="max-w-sm">
+          <div className="min-w-0 max-w-[210px] sm:max-w-sm">
             <p
-              className={`text-[11px] font-semibold uppercase tracking-[0.18em] ${
+              className={`text-[10px] font-semibold uppercase tracking-[0.16em] sm:text-[11px] sm:tracking-[0.18em] ${
                 isScrolled || isOverlay ? "text-sky-100/90" : "text-sky-700"
               }`}
             >
               Portal Resmi
             </p>
             <p
-              className={`mt-1 text-base font-bold leading-tight ${
+              className={`mt-0.5 line-clamp-2 text-sm font-bold leading-tight sm:mt-1 sm:text-base ${
                 isScrolled || isOverlay ? "text-white" : "text-slate-900"
               }`}
             >
               Pemerintahan Kampung Palareng
             </p>
             <p
-              className={`mt-0.5 text-sm font-medium ${
+              className={`mt-0.5 text-xs font-medium sm:text-sm ${
                 isScrolled || isOverlay ? "text-white/82" : "text-slate-600"
               }`}
             >
@@ -178,9 +178,9 @@ export function PublicNavbar({
           )}
         </nav>
 
-        <details className="relative lg:hidden">
+        <details className="relative shrink-0 lg:hidden">
           <summary
-            className={`flex cursor-pointer list-none items-center rounded-xl border px-4 py-2 text-sm font-semibold ${
+            className={`flex cursor-pointer list-none items-center rounded-xl border px-3 py-2 text-sm font-semibold sm:px-4 ${
               isScrolled || isOverlay
                 ? "border-white/30 bg-white/10 text-white"
                 : "border-slate-200 bg-white text-slate-800"
@@ -188,7 +188,7 @@ export function PublicNavbar({
           >
             Menu
           </summary>
-          <div className="absolute right-0 top-full z-40 mt-3 w-72 rounded-2xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-[0_22px_50px_rgba(15,23,42,0.14)]">
+          <div className="absolute right-0 top-full z-40 mt-3 w-[min(18rem,calc(100vw-1.5rem))] rounded-2xl border border-slate-200 bg-white p-3 text-sm text-slate-700 shadow-[0_22px_50px_rgba(15,23,42,0.14)]">
             {groupedNavItems.map((item) =>
               "href" in item ? (
                 <Link
