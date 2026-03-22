@@ -50,7 +50,7 @@ export function HomeMapPreview({ markers }: { markers: RumahMarker[] }) {
       </div>
 
       {isOpen ? (
-        <div className="fixed inset-0 z-[1200] bg-[rgba(2,6,23,0.82)] p-2 backdrop-blur-sm sm:p-4">
+        <div className="fixed inset-0 z-[1200] bg-[rgba(2,6,23,0.82)] backdrop-blur-sm sm:p-4">
           <button
             type="button"
             onClick={() => setIsOpen(false)}
@@ -59,7 +59,7 @@ export function HomeMapPreview({ markers }: { markers: RumahMarker[] }) {
           >
             <X className="h-5 w-5" />
           </button>
-          <div className="h-full overflow-hidden rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,_#081122,_#0f172a)] p-2 shadow-[0_30px_90px_rgba(0,0,0,0.42)] sm:rounded-[1.8rem] sm:p-3">
+          <div className="h-full overflow-hidden bg-[linear-gradient(180deg,_#081122,_#0f172a)] sm:rounded-[1.8rem] sm:border sm:border-white/10 sm:p-3 sm:shadow-[0_30px_90px_rgba(0,0,0,0.42)]">
             <PublicMap markers={markers} focusMode />
           </div>
         </div>

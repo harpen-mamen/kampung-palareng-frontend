@@ -695,9 +695,9 @@ export function LeafletMap({
       <div
         ref={containerRef}
         className={`leaflet-map-host w-full rounded-[1.15rem] border border-white/70 sm:rounded-[1.3rem] ${
-          focusMode ? "h-[calc(100vh-7rem)] min-h-[520px]" : "h-[360px] sm:h-[430px] lg:h-[520px]"
+          focusMode ? "h-[100dvh] min-h-[100dvh] rounded-none border-0 sm:h-[calc(100vh-7rem)] sm:min-h-[520px] sm:rounded-[1.3rem] sm:border sm:border-white/70" : "h-[360px] sm:h-[430px] lg:h-[520px]"
         }`}
-        style={{ height: "100%", minHeight: focusMode ? "520px" : "360px", width: "100%" }}
+        style={{ height: "100%", minHeight: focusMode ? "100dvh" : "360px", width: "100%" }}
       />
 
       {activePopupMarker && activePopupPosition && !focusMode ? (
