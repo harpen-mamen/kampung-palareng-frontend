@@ -112,7 +112,7 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
                   return (
                     <span
                       key={`${line}-${lineIndex}`}
-                      className={`block ${lineIndex === 1 ? "mt-1 md:mt-2" : ""}`}
+                      className={`block ${lineIndex === 1 ? "mt-1 whitespace-nowrap md:mt-2" : ""}`}
                     >
                       {Array.from(line).map((char, index) => (
                         <span
