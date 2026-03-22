@@ -24,12 +24,7 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
   const title = (hero.hero_title || "Palareng").trim() || "Palareng";
   const titleParts = useMemo(() => {
     if (/kampung palareng/i.test(title)) {
-      const withoutPhrase = title.replace(/\s*Kampung Palareng\s*/i, " ").replace(/\s+/g, " ").trim();
-      const baseWords = withoutPhrase ? withoutPhrase.split(" ") : ["Website", "Resmi"];
-      const splitPoint = Math.max(1, baseWords.length - 1);
-      const upperLine = baseWords.slice(0, splitPoint).join(" ").trim() || "Website";
-      const middleLine = baseWords.slice(splitPoint).join(" ").trim() || "Resmi";
-      return [upperLine, middleLine, "Palareng"];
+      return ["Website", "Resmi Kampung", "Palareng"];
     }
 
     return [title];
