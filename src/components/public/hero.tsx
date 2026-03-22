@@ -22,14 +22,15 @@ export function HeroSection({ hero }: { hero: HeroSetting }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const currentIndex = slides.length > 0 ? activeIndex % slides.length : 0;
   const title = (hero.hero_title || "Palareng").trim() || "Palareng";
-  const hasPalarengHeroLayout = /kampung palareng/i.test(title);
+  const normalizedTitle = title.replace(/\s+/g, " ").trim();
+  const hasPalarengHeroLayout = /kampung palareng/i.test(normalizedTitle);
   const titleParts = useMemo(() => {
     if (hasPalarengHeroLayout) {
       return ["Website", "Resmi Kampung", "Palareng"];
     }
 
-    return [title];
-  }, [hasPalarengHeroLayout, title]);
+    return [normalizedTitle];
+  }, [hasPalarengHeroLayout, normalizedTitle]);
   const quickLinks = [
     {
       href: "/profil",
